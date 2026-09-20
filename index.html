@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ankita Menon - Portfolio (v2, Option E accents)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  --void: #0a0a0a;
+  --paper: #fbfaf8;
+  --mute: #9a9a9a;
+  --line-dark: rgba(255,255,255,0.08);
+
+  --cobalt: #2D5FFF;
+  --cobalt-light: #5B86FF;
+  --cobalt-fill: rgba(45,95,255,0.12);
+  --cobalt-border: rgba(91,134,255,0.35);
+
+  --lime: #C8FF4D;
+  --lime-fill: rgba(200,255,77,0.12);
+  --lime-border: rgba(200,255,77,0.35);
+
+  --pink: #FF5BAA;
+  --pink-fill: rgba(255,45,140,0.12);
+  --pink-border: rgba(255,91,170,0.35);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--void);
+  color: var(--paper);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 64px; }
+@media (max-width: 640px){ .wrap{ padding: 0 24px; } }
+
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 24px; display: flex; align-items: center; gap: 8px;
+}
+.eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.hero .eyebrow .dot { animation: dot-glow 2s ease-in-out infinite; }
+@keyframes dot-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(91,134,255,0.6); }
+  50% { box-shadow: 0 0 8px 3px rgba(91,134,255,0.8); }
+}
+
+/* color utility classes - accent set per section */
+.accent-cobalt { color: var(--cobalt-light); }
+.accent-lime { color: var(--lime); }
+.accent-pink { color: var(--pink); }
+
+.pill {
+  display: inline-flex; align-items: center; gap: 8px; border-radius: 8px;
+  padding: 6px 12px; font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  margin-bottom: 18px;
+}
+.pill .dot { width: 6px; height: 6px; border-radius: 50%; }
+.pill-cobalt { background: var(--cobalt-fill); border: 1px solid var(--cobalt-border); color: var(--cobalt-light); }
+.pill-cobalt .dot { background: var(--cobalt-light); }
+.pill-lime { background: var(--lime-fill); border: 1px solid var(--lime-border); color: var(--lime); }
+.pill-lime .dot { background: var(--lime); }
+.pill-pink { background: var(--pink-fill); border: 1px solid var(--pink-border); color: var(--pink); }
+.pill-pink .dot { background: var(--pink); }
+.pill-mute { background: transparent; border: 1px solid var(--mute); color: var(--mute); }
+.pill-mute .dot { background: var(--mute); }
+
+/* ---- top nav ---- */
+nav.topnav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(10,10,10,0.85); backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line-dark);
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 64px;
+}
+nav.topnav .id { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 15px; color: var(--paper); }
+nav.topnav .links { display: flex; gap: 32px; font-family: 'JetBrains Mono', monospace; font-size: 12.5px; letter-spacing: 0.04em; color: var(--mute); }
+nav.topnav .links a { color: var(--mute); text-decoration: none; }
+nav.topnav .links a:hover { color: var(--paper); }
+@media (max-width: 640px){ nav.topnav{ padding: 16px 24px; } nav.topnav .links{ gap: 16px; font-size: 11px; } }
+
+.contact-overlay { display: none; position: fixed; inset: 0; z-index: 200; pointer-events: none; }
+.contact-overlay.open { display: block; }
+.contact-popup { position: absolute; top: 64px; right: 64px; background: #111; border: 1px solid var(--line-dark); border-radius: 12px; padding: 28px 32px; width: 100%; max-width: 300px; pointer-events: auto; }
+.contact-popup h3 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 20px; color: var(--paper); margin: 0 0 20px; }
+.contact-popup-row { border-top: 1px solid var(--line-dark); padding: 14px 0; }
+.contact-popup-row:first-of-type { border-top: none; padding-top: 0; }
+.contact-popup-row a { display: flex; justify-content: space-between; align-items: center; text-decoration: none; gap: 16px; }
+.contact-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.04em; color: var(--mute); text-transform: uppercase; }
+.contact-value { font-family: 'Inter', sans-serif; font-size: 14px; color: var(--paper); text-align: right; }
+.contact-popup-row a:hover .contact-value { color: var(--cobalt-light); }
+@media (max-width: 640px){ .contact-popup { top: 56px; right: 24px; left: 24px; max-width: none; } }
+
+/* ---- hero (cobalt home base) ---- */
+.hero { padding: 130px 0 100px; border-bottom: 1px solid var(--line-dark); }
+.hero h1 {
+  font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800;
+  font-size: clamp(40px, 5.6vw, 68px); line-height: 1.1; letter-spacing: -0.02em; max-width: 920px;
+}
+.hero h1 em { font-style: normal; color: var(--cobalt-light); }
+.hero .subtitle { font-size: 17px; color: #9a988f; max-width: 600px; line-height: 1.6; margin-top: 24px; }
+.hero-meta { display: flex; gap: 36px; margin-top: 44px; font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: var(--mute); }
+.hero-meta span.k { display:block; text-transform: uppercase; letter-spacing: 0.06em; font-size: 10.5px; margin-bottom: 6px; color: #6f6f6f; }
+.cta-row { display: flex; gap: 14px; margin-top: 44px; }
+.btn { font-family: 'JetBrains Mono', monospace; font-size: 13px; padding: 13px 26px; border-radius: 4px; text-decoration: none; letter-spacing: 0.03em; }
+.btn-primary { background: var(--cobalt); color: var(--paper); font-weight: 500; }
+.btn-primary:hover { background: var(--cobalt-light); }
+.btn-ghost { border: 1px solid var(--line-dark); color: var(--paper); }
+.btn-ghost:hover { border-color: var(--cobalt-light); color: var(--cobalt-light); }
+
+/* ---- section shell ---- */
+.section { padding: 110px 0; border-bottom: 1px solid var(--line-dark); }
+.section .head { max-width: 640px; margin-bottom: 56px; }
+.section h2 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 40px; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 18px; }
+.section .lede { font-size: 16px; line-height: 1.7; color: #9a988f; max-width: 560px; }
+
+/* ---- case cards ---- */
+.case {
+  border: 1px solid var(--line-dark); border-radius: 14px; padding: 40px; margin-bottom: 24px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap;
+  position: relative;
+}
+.case h3 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 26px; line-height: 1.2; margin-bottom: 12px; max-width: 480px; }
+.case p { color: #9a988f; font-size: 15px; line-height: 1.65; max-width: 460px; }
+.case.placeholder { border-style: dashed; opacity: 0.6; }
+.case.placeholder h3 { color: #cfcfcf; }
+
+.case-target {
+  position: absolute; top: 22px; right: 24px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.05em; text-transform: uppercase;
+  color: var(--mute); border: 1px solid var(--line-dark); border-radius: 6px; padding: 5px 10px;
+  background: rgba(255,255,255,0.02); white-space: nowrap;
+}
+@media (max-width: 640px){ .case-target{ position: static; display: inline-block; margin-bottom: 16px; } }
+
+.case-link { font-family: 'JetBrains Mono', monospace; font-size: 13px; text-decoration: none; white-space: nowrap; }
+.case-link.cobalt { color: var(--cobalt-light); }
+.case-link.cobalt:hover { color: var(--paper); }
+.case-link.lime { color: var(--lime); }
+.case-link.lime:hover { color: var(--paper); }
+.case-link.pink { color: var(--pink); }
+.case-link.pink:hover { color: var(--paper); }
+.case-link.mute { color: var(--mute); }
+
+/* ---- featured case card (Nomerra) ---- */
+.case.featured {
+  border-left: 3px solid var(--cobalt-light);
+  padding-left: 37px;
+}
+
+/* ---- AI builds (upfront, 2-col, matches explore-card style) ---- */
+.ai-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+@media (max-width: 760px){ .ai-grid{ grid-template-columns: 1fr; } }
+.ai-card {
+  display: block; border: 1px solid var(--line-dark); border-radius: 12px; overflow: hidden;
+  background: #111; text-decoration: none; transition: border-color 0.2s;
+}
+.ai-card:hover { border-color: var(--cobalt-light); }
+.ai-thumb { width: 100%; aspect-ratio: 16/10; overflow: hidden; background: #161616; }
+.ai-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+.ai-info { padding: 20px 22px 24px; }
+.ai-info .pill { align-self: flex-start; }
+.ai-info h3 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; color: var(--paper); font-size: 19px; margin: 0 0 8px; }
+.ai-info p { color: var(--mute); font-size: 13.5px; line-height: 1.5; margin: 0; }
+
+/* ---- compact discoveries cards (2-col, demoted) ---- */
+.case-mini-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+@media (max-width: 760px){ .case-mini-grid{ grid-template-columns: 1fr; } }
+.case-mini {
+  border: 1px solid var(--line-dark); border-radius: 12px; padding: 26px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
+  display: flex; flex-direction: column; position: relative;
+}
+.case-mini h3 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 18px; line-height: 1.25; margin-bottom: 10px; }
+.case-mini p { color: #9a988f; font-size: 13.5px; line-height: 1.55; flex-grow: 1; margin-bottom: 16px; }
+.case-mini-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+.case-mini-head .pill { align-self: auto; margin: 0; font-size: 10.5px; padding: 5px 10px; }
+.case-mini-head .case-target { position: static; margin: 0; font-size: 9.5px; padding: 4px 8px; }
+.case-mini .case-link { font-size: 12px; }
+
+/* ---- stat readout (lime section) ---- */
+.stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--line-dark); border: 1px solid var(--line-dark); border-radius: 14px; overflow: hidden; }
+.stat { background: var(--void); padding: 40px 30px; }
+.stat .num { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 50px; color: var(--lime); line-height: 1; }
+.stat .label { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; letter-spacing: 0.06em; color: var(--mute); text-transform: uppercase; margin-top: 16px; }
+.stat .desc { font-size: 13.5px; color: #9a988f; line-height: 1.6; margin-top: 14px; }
+@media (max-width: 760px){ .stats{ grid-template-columns: 1fr; } }
+
+/* ---- design grid (pink section) ---- */
+.design-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+@media (max-width: 900px){ .design-grid{ grid-template-columns: 1fr; } }
+.design-card {
+  border: 1px solid var(--line-dark); border-radius: 14px; padding: 30px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
+  display: flex; flex-direction: column;
+}
+.design-card .tag { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.05em; color: var(--pink); text-transform: uppercase; margin-bottom: 14px; }
+.design-card h4 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 20px; margin-bottom: 10px; line-height: 1.25; }
+.design-card p { color: #9a988f; font-size: 13.5px; line-height: 1.6; flex-grow: 1; }
+.design-card .case-link { display: inline-block; margin-top: 18px; }
+
+/* ---- about ---- */
+.about-body { font-size: 17px; line-height: 1.75; color: #c9c7c0; max-width: 600px; }
+.about-body + .about-body { margin-top: 18px; }
+
+.about-grid { display: flex; gap: 48px; align-items: center; flex-wrap: wrap; }
+.about-col { flex: 1; min-width: 300px; }
+.about-pills { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 28px; }
+.about-pill { display: inline-flex; align-items: center; gap: 10px; border: 1px solid var(--cobalt-border); color: var(--cobalt-light); font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; padding: 11px 22px; border-radius: 8px; }
+.about-pill .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.about-photo { width: 340px; height: 340px; border-radius: 50%; overflow: hidden; flex-shrink: 0; background: var(--line-dark); }
+.about-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+@media (max-width: 900px){ .about-photo { width: 220px; height: 220px; margin: 0 auto; } .about-grid { flex-direction: column-reverse; } }
+
+.explore-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 40px; }
+.explore-card { display: block; border: 1px solid var(--line-dark); border-radius: 12px; overflow: hidden; background: #111; text-decoration: none; transition: border-color 0.2s; }
+.explore-card:hover { border-color: var(--lime); }
+.explore-thumb { width: 100%; aspect-ratio: 16/11; overflow: hidden; background: #161616; }
+.explore-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+.explore-thumb-placeholder { display: flex; align-items: center; justify-content: center; }
+.explore-card-placeholder { opacity: 0.5; cursor: default; }
+.explore-info { padding: 18px 20px; }
+.explore-info h3 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; color: var(--paper); font-size: 17px; margin: 0 0 6px; }
+.explore-info p { font-family: 'Inter', sans-serif; color: var(--mute); font-size: 13px; margin: 0; }
+@media (max-width: 900px){ .explore-grid { grid-template-columns: 1fr; } }
+
+/* ---- footer (shared contact band) ---- */
+footer.contact-band { background: var(--cobalt); padding: 56px 0; }
+footer.contact-band .eyebrow-cta { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 12.5px; letter-spacing: 0.04em; color: rgba(251,250,248,0.65); text-transform: uppercase; margin-bottom: 18px; }
+footer.contact-band h2 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; letter-spacing: -0.02em; color: var(--paper); font-size: 40px; margin: 0 0 10px; }
+footer.contact-band .role-line { font-family: 'Inter', sans-serif; color: rgba(251,250,248,0.85); font-size: 15px; margin: 0 0 28px; }
+footer.contact-band .contact-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: rgba(251,250,248,0.95); }
+footer.contact-band .contact-row a { color: rgba(251,250,248,0.95); text-decoration: none; border-bottom: 1px solid rgba(251,250,248,0.4); }
+footer.contact-band .contact-row a:hover { border-bottom-color: rgba(251,250,248,0.95); }
+footer.contact-band .contact-row .sep { color: rgba(251,250,248,0.45); }
+@media (max-width: 640px){ footer.contact-band { padding: 40px 0; } footer.contact-band h2 { font-size: 28px; } footer.contact-band .contact-row { font-size: 12px; gap: 8px; } }
+
+footer.meta {
+  background: var(--void); padding: 22px 0;
+}
+footer.meta .wrap { display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--mute); }
+@media (max-width: 640px){ footer.meta .wrap{ flex-direction: column; gap: 8px; } }
+
+/* ---- embedded case study (Vasana) ---- */
+.case-study-page { border-top: 1px solid var(--line-dark); }
+.cs-hero { padding: 110px 0 60px; border-bottom: 1px solid var(--line-dark); }
+.cs-hero h1 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(38px, 6vw, 60px); line-height: 1.05; margin-bottom: 20px; max-width: 680px; }
+.cs-hero .lede { font-size: 18px; line-height: 1.6; color: var(--mute); max-width: 560px; margin-bottom: 36px; }
+.meta-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; border-top: 1px solid var(--line-dark); padding-top: 24px; margin-bottom: 36px; }
+.meta-row .item .label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); margin-bottom: 6px; }
+.meta-row .item .value { font-size: 14.5px; color: var(--paper); line-height: 1.4; }
+@media (max-width: 640px){ .meta-row{ grid-template-columns: repeat(2, 1fr); gap: 18px 16px; } }
+.proof-strip { display: flex; flex-wrap: wrap; gap: 12px; }
+.proof-pill { display: inline-flex; align-items: center; gap: 8px; border-radius: 8px; padding: 8px 14px; font-family: 'JetBrains Mono', monospace; font-size: 12px; background: var(--pink-fill); border: 1px solid var(--pink-border); color: var(--pink); }
+.proof-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--pink); }
+.cs-hero-image { margin-top: 48px; }
+.cs-hero-image img { width: 100%; display: block; border-radius: 10px; border: 1px solid var(--line-dark); }
+.cs-section { padding: 72px 0; border-bottom: 1px solid var(--line-dark); }
+.cs-section-num { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pink); margin-bottom: 16px; }
+.cs-section h2 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(26px, 3.6vw, 36px); margin-bottom: 18px; max-width: 600px; }
+.cs-section .lede { font-size: 16px; line-height: 1.7; color: var(--mute); max-width: 620px; }
+.cs-section .lede + .lede { margin-top: 14px; }
+.cs-pullquote { margin-top: 28px; padding: 20px 24px; border-left: 2px solid var(--pink); font-family: 'Bricolage Grotesque', sans-serif; font-size: 17px; font-style: italic; color: var(--paper); max-width: 540px; }
+.cs-pullquote span { display: block; margin-top: 10px; font-family: 'JetBrains Mono', monospace; font-style: normal; font-size: 11.5px; color: var(--mute); }
+.beats-visual { margin-top: 32px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+.beat-card { background: rgba(255,255,255,0.02); border: 1px solid var(--line-dark); border-radius: 16px; padding: 28px; display: flex; flex-direction: column; min-height: 260px; }
+.beat-card-num { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--pink); margin-bottom: 14px; }
+.beat-card h4 { font-size: 22px; margin-bottom: 12px; color: var(--paper); }
+.beat-card p { font-size: 15px; line-height: 1.6; color: var(--mute); margin-bottom: 18px; max-width: 460px; }
+.cs-chip-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+.cs-chip { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; padding: 5px 9px; border-radius: 6px; border: 1px solid var(--line-dark); color: var(--mute); }
+.beat-card.has-img img { width: 100%; border-radius: 10px; margin-top: auto; border: 1px solid var(--line-dark); display: block; }
+.beat-card.has-img { padding-bottom: 22px; }
+@media (max-width: 640px){ .beats-visual{ grid-template-columns: 1fr; } }
+.work-block { margin-top: 32px; }
+.work-block img { width: 100%; border-radius: 12px; border: 1px solid var(--line-dark); display: block; background: #fff; }
+.then-now { margin-top: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.then-now .col .col-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); margin-bottom: 14px; }
+.then-now .col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.then-now .col li { font-size: 14.5px; line-height: 1.55; color: var(--mute); padding-left: 16px; position: relative; }
+.then-now .col li::before { content: '-'; position: absolute; left: 0; color: var(--mute); }
+.then-now .col.now li::before { color: var(--pink); }
+@media (max-width: 640px){ .then-now{ grid-template-columns: 1fr; gap: 28px; } }
+.stats-4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 900px){ .stats-4{ grid-template-columns: 1fr 1fr; } }
+.cs-back-link { display: inline-block; margin-top: 18px; }
+
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="#" class="id" style="text-decoration:none;">Ankita Menon</a>
+  <div class="links"><a href="#" id="contact-trigger">contact</a></div>
+</nav>
+
+<div class="contact-overlay" id="contact-overlay">
+  <div class="contact-popup">
+    <h3>Let's talk</h3>
+    <div class="contact-popup-row">
+      <a href="https://www.linkedin.com/in/ankitabmenon/" target="_blank" rel="noopener noreferrer">
+        <span class="contact-label">LinkedIn</span>
+        <span class="contact-value">linkedin/ankitabmenon</span>
+      </a>
+    </div>
+    <div class="contact-popup-row">
+      <a href="mailto:ankitamenon00@gmail.com">
+        <span class="contact-label">Email</span>
+        <span class="contact-value">ankitamenon00@gmail.com</span>
+      </a>
+    </div>
+    <div class="contact-popup-row">
+      <a href="tel:+4915256091858">
+        <span class="contact-label">Phone</span>
+        <span class="contact-value">+49 15256091858</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow accent-cobalt"><span class="dot" style="background:var(--cobalt-light);"></span>Berlin</div>
+    <h1>Designs the system.<br>Owns the <em>outcome.</em></h1>
+    <p class="subtitle">AI-Native Product Manager with UX Design Expertise.<br>Trained as a lead product designer, sharpened by early-stage innovation work, proven across B2B SaaS product management.</p>
+    <div class="hero-meta">
+      <div><span class="k">Currently</span>Product Manager, Elli (VW Group)</div>
+    </div>
+    <div class="cta-row">
+      <a href="assets/Ankita_Menon_CV.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View resume</a>
+      <a href="https://www.linkedin.com/in/ankitabmenon/" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AI BUILDS - COBALT (UPFRONT) ===== -->
+<section class="section" id="ai-builds">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow accent-cobalt"><span class="dot" style="background:var(--cobalt-light);"></span>AI Builds — 01</div>
+      <h2>Live tools, not slideware</h2>
+      <p class="lede">Two AI-native tools I designed, prompted, and shipped. Live and usable right now, not mockups in a deck.</p>
+    </div>
+
+    <div class="ai-grid">
+      <a href="https://adoption-maturity-scorer.vercel.app/" target="_blank" rel="noopener noreferrer" class="ai-card">
+        <div class="ai-thumb"><img src="assets/ai-adoption-scorer-thumb.png" alt="AI Adoption Maturity Scorer preview"></div>
+        <div class="ai-info">
+          <div class="pill pill-cobalt"><span class="dot"></span>Live tool · Claude API</div>
+          <h3>AI Adoption Maturity Scorer</h3>
+          <p>A live, Claude-scored maturity assessment with generated recommendations.</p>
+        </div>
+      </a>
+      <a href="https://pricing-eight-psi.vercel.app/" target="_blank" rel="noopener noreferrer" class="ai-card">
+        <div class="ai-thumb"><img src="assets/ai-pricing-dashboard-thumb.png" alt="Elli Pricing Signals Dashboard preview"></div>
+        <div class="ai-info">
+          <div class="pill pill-cobalt"><span class="dot"></span>Live tool · Sales enablement</div>
+          <h3>Elli Pricing Signals Dashboard</h3>
+          <p>Auto-updating competitive tariff tracking across five charging providers.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRODUCT DESIGN - PINK (THE FOUNDATION) ===== -->
+<section class="section" id="design">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow accent-pink"><span class="dot" style="background:var(--pink);"></span>The foundation - 02</div>
+      <h2>Platforms <span class="accent-pink">built</span></h2>
+      <p class="lede">Before anything else, I learned to design: research, IA, visual systems, and the final pixel, end-to-end, across 10+ shipped platforms.</p>
+    </div>
+
+    <div class="design-grid">
+      <div class="design-card">
+        <div class="tag">Now live · 27,400+ members</div>
+        <h4>Vasana, Behavioral Genome</h4>
+        <p>End-to-end design and product strategy for an AI-driven behavioral health platform, now live, trusted by EY, Accenture, and Starbucks.</p>
+        <a href="case-studies/vasana.html" class="case-link pink">View case study →</a>
+      </div>
+      <div class="design-card">
+        <div class="tag">Lead Product Designer, 2022–24</div>
+        <h4>yuj, a global design company</h4>
+        <p>Spotted the gap in yuj's own website and led the fix, working directly with the CEO and CDO to rethink its IA and content strategy for real organic reach.</p>
+        <a href="https://www.yujdesigns.com/" class="case-link pink" target="_blank" rel="noopener noreferrer">Visit yuj.com →</a>
+      </div>
+      <div class="design-card">
+        <div class="tag">Case study</div>
+        <h4>SmartSwipe</h4>
+        <p>A banking journey personalized to you, designed end-to-end for a fintech context.</p>
+        <a href="case-studies/smartswipe.html" class="case-link pink">View case study →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRODUCT MANAGEMENT - LIME (WHERE IT PAYS OFF) ===== -->
+<section class="section" id="pm">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow accent-lime"><span class="dot" style="background:var(--lime);"></span>Where it pays off - 03</div>
+      <h2>Elli, <span class="accent-lime">Volkswagen Group</span></h2>
+      <p class="lede">Design thinking doesn't stop at the screen. At Elli, I took it into fraud systems, account activation, and rebuilding workflows to be AI-driven.</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="num">83%</div>
+        <div class="label">Fraud detection</div>
+        <div class="desc">Reduction in investigation time via an AI-assisted detection initiative, coordinated across Engineering, Legal, and Operations.</div>
+      </div>
+      <div class="stat">
+        <div class="num">15%</div>
+        <div class="label">Account activation</div>
+        <div class="desc">Lift in first-card completions, from a multi-touchpoint program targeting 900+ dormant accounts.</div>
+      </div>
+      <div class="stat">
+        <div class="num">30%</div>
+        <div class="label">Competitive intel</div>
+        <div class="desc">Cut in leadership time-to-insight via an AI dashboard tracking 15+ competitors across 5+ markets.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== ABOUT - NEUTRAL ===== -->
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-col">
+        <div class="head">
+          <div class="eyebrow accent-cobalt"><span class="dot" style="background:var(--cobalt-light);"></span>About - 04</div>
+          <h2>A bit about <em style="color:var(--cobalt-light); font-style:normal;">me</em></h2>
+        </div>
+        <p class="about-body">I think about products the way I think about design, as systems that either earn someone's trust or lose it in the first five seconds. I started as a designer because I wanted to make things people actually want to use, and moved into product management because I wanted to own why those things existed in the first place.</p>
+        <p class="about-body">In practice that means I move across the full arc of a product decision, spotting where the UX breaks down, shaping the strategy that decides what's worth fixing, then working with engineering on how it actually ships.</p>
+        <div class="about-pills">
+          <span class="about-pill"><span class="dot" style="background:var(--cobalt-light);"></span>Lately: building with an AI-native mindset and workflow</span>
+        </div>
+      </div>
+      <div class="about-photo">
+        <img src="assets/about-avatar.webp" alt="Ankita Menon animated avatar">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="builds">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow accent-lime"><span class="dot" style="background:var(--lime);"></span>Explorations — 05</div>
+      <h2>Out in the <span class="accent-lime">wild</span></h2>
+      <p class="lede">Vibe-coded side projects, built fast and shipped for fun.</p>
+    </div>
+    <div class="explore-grid">
+      <a href="https://analog-adventures-now.lovable.app/" target="_blank" rel="noopener noreferrer" class="explore-card">
+        <div class="explore-thumb"><img src="assets/explore-sidequest.png" alt="Side Quest app screenshot"></div>
+        <div class="explore-info">
+          <h3>Side Quest</h3>
+          <p>Pick a vibe, get an adventure.</p>
+        </div>
+      </a>
+      <a href="https://bureaucrazy.lovable.app" target="_blank" rel="noopener noreferrer" class="explore-card">
+        <div class="explore-thumb"><img src="assets/explore-bureaucrazy.png" alt="Bureaucrazy Buddy app screenshot"></div>
+        <div class="explore-info">
+          <h3>Bureaucrazy Buddy</h3>
+          <p>Your personal guide to getting settled in Germany.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DISCOVERIES - COBALT (COMPACT, BOTTOM) ===== -->
+<section class="section" id="discoveries">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow accent-cobalt"><span class="dot" style="background:var(--cobalt-light);"></span>Self-initiated — 06</div>
+      <h2>Where curiosity did the work</h2>
+      <p class="lede">Not client work, not assigned work. Problems I noticed in the wild, and decided were worth solving.</p>
+    </div>
+
+    <div class="case-mini-grid">
+      <div class="case-mini">
+        <div class="case-mini-head">
+          <div class="pill pill-cobalt"><span class="dot"></span>Concept design · Prototype</div>
+          <span class="case-target">For Nomerra</span>
+        </div>
+        <h3>From source to done.</h3>
+        <p>Private fund reconciliation runs on retyped numbers and quiet re-checking. I designed the screen where a fund controller decides when an AI's match is trustworthy, and when the call is theirs alone.</p>
+        <a href="case-studies/nomerra.html" class="case-link cobalt">View case study →</a>
+      </div>
+
+      <div class="case-mini">
+        <div class="case-mini-head">
+          <div class="pill pill-cobalt"><span class="dot"></span>Navigation teardown · Product audit</div>
+          <span class="case-target">For Peec AI</span>
+        </div>
+        <h3>Every feature gets a seat at the table</h3>
+        <p>A teardown of what happens to navigation when a product grows fast, diagnosed where Peec's IA breaks under feature growth, then designed and prototyped a fix.</p>
+        <a href="case-studies/peec.html" class="case-link cobalt">View case study →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="contact-band" id="contact">
+  <div class="wrap">
+    <span class="eyebrow-cta">Let's talk</span>
+    <h2>Ankita Menon</h2>
+    <p class="role-line">Product Manager, grounded in UX thinking.</p>
+    <div class="contact-row">
+      <span>Berlin, DE</span><span class="sep">|</span>
+      <a href="mailto:ankitamenon00@gmail.com">ankitamenon00@gmail.com</a><span class="sep">|</span>
+      <span>+49 15256091858</span><span class="sep">|</span>
+      <a href="https://www.linkedin.com/in/ankitabmenon/" target="_blank" rel="noopener noreferrer">linkedin/ankitabmenon</a>
+    </div>
+  </div>
+</footer>
+
+<footer class="meta">
+  <div class="wrap">
+    <span>Berlin, DE</span>
+    <span>© 2026 Ankita Menon</span>
+  </div>
+</footer>
+
+<script>
+  var contactTrigger = document.getElementById('contact-trigger');
+  var contactOverlay = document.getElementById('contact-overlay');
+
+  contactTrigger.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    contactOverlay.classList.toggle('open');
+  });
+  document.addEventListener('click', function(e) {
+    if (contactOverlay.classList.contains('open') && !e.target.closest('.contact-popup') && e.target !== contactTrigger) {
+      contactOverlay.classList.remove('open');
+    }
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      contactOverlay.classList.remove('open');
+    }
+  });
+</script>
+</body>
+</html>
