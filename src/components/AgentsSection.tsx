@@ -25,6 +25,12 @@ export default function AgentsSection() {
               rel="noopener noreferrer"
               className="ai-card"
             >
+              {agent.thumbnail ? (
+                <div className="ai-thumb">
+                  {/* eslint-disable-next-line @next/next/no-img-element -- fixed-container thumbnail, dimensions vary per screenshot */}
+                  <img src={agent.thumbnail} alt={agent.title} />
+                </div>
+              ) : null}
               <div className="ai-info">
                 <div className="pill pill-cobalt">
                   <span className="dot" />

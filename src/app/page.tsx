@@ -79,7 +79,10 @@ export default function Home() {
                 </span>
               </div>
             </div>
-            <div className="about-photo" />
+            <div className="about-photo">
+              {/* eslint-disable-next-line @next/next/no-img-element -- decorative circular avatar, fixed container */}
+              <img src="/about/avatar.webp" alt="Ankita Menon" />
+            </div>
           </div>
         </div>
       </section>

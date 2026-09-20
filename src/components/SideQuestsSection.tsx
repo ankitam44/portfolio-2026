@@ -32,6 +32,12 @@ export default function SideQuestsSection() {
                 rel="noopener noreferrer"
                 className="explore-card"
               >
+                {entry.thumbnail ? (
+                  <div className="explore-thumb">
+                    {/* eslint-disable-next-line @next/next/no-img-element -- fixed-container thumbnail, dimensions vary per screenshot */}
+                    <img src={entry.thumbnail} alt={entry.title} />
+                  </div>
+                ) : null}
                 <div className="explore-info">
                   <h3>{entry.title}</h3>
                   <p>{entry.description}</p>

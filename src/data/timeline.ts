@@ -290,6 +290,7 @@ export const agents: AgentEntry[] = [
     pill: "Live tool · Claude API",
     description: "A live, Claude-scored maturity assessment with generated recommendations.",
     externalUrl: "https://adoption-maturity-scorer.vercel.app/",
+    thumbnail: "/builds/ai-adoption-scorer.webp",
   },
   {
     slug: "elli-pricing-signals-dashboard",
@@ -297,6 +298,7 @@ export const agents: AgentEntry[] = [
     pill: "Live tool · Sales enablement",
     description: "Auto-updating competitive tariff tracking across five charging providers.",
     externalUrl: "https://pricing-eight-psi.vercel.app/",
+    thumbnail: "/builds/elli-pricing-dashboard.webp",
   },
 ];
 
@@ -306,12 +308,14 @@ export const sideQuests: SideQuestEntry[] = [
     title: "Side Quest",
     description: "Pick a vibe, get an adventure.",
     externalUrl: "https://analog-adventures-now.lovable.app/",
+    thumbnail: "/builds/side-quest.webp",
   },
   {
     slug: "bureaucrazy-buddy",
     title: "Bureaucrazy Buddy",
     description: "Your personal guide to getting settled in Germany.",
     externalUrl: "https://bureaucrazy.lovable.app",
+    thumbnail: "/builds/bureaucrazy-buddy.png",
   },
   {
     slug: "nomerra",
